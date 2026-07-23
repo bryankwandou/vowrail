@@ -19,3 +19,4 @@ src/test4.txt
 smoke.pid
 
 *.tsbuildinfo
+.vercel
