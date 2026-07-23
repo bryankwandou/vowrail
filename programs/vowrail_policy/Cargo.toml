@@ -1,0 +1,20 @@
+[package]
+name = "vowrail_policy"
+version = "0.1.0"
+description = "Deterministic spending policy and decision receipts for Vowrail"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "vowrail_policy"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build"]
+
+[dependencies]
+anchor-lang = "0.32.1"
