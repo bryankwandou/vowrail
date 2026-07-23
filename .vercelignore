@@ -1,0 +1,11 @@
+﻿.git
+.next
+node_modules
+target
+tollary-chain
+.env.local
+*.log
+*.pid
+*.tsbuildinfo
+Cargo.lock
+programs/**/target
