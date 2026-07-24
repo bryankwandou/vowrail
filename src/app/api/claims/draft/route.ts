@@ -15,7 +15,7 @@ export async function POST(request:Request){
   if(process.env.GROQ_API_KEY){
     try{
       const groq=new Groq({apiKey:process.env.GROQ_API_KEY});
-      const completion=await groq.chat.completions.create({model:process.env.GROQ_MODEL||"llama-3.3-70b-versatile",temperature:0,response_format:{type:"json_object"},messages:[{role:"system",content:"Draft insurance claims intake using only facts in the source statement. Never infer fault, cause, extent, injury, parties, or timing. For absent facts write Not reported. unsupported_details must be an array of strings and review_required must be true."},{role:"user",content:parsed.data.raw_client_statement}]});
+      const completion=await groq.chat.completions.create({model:process.env.GROQ_MODEL||"llama-3.3-70b-versatile",temperature:0,response_format:{type:"json_object"},messages:[{role:"system",content:"Return a JSON object for insurance claims intake using only facts in the source statement. Never infer fault, cause, extent, injury, parties, or timing. For absent facts write Not reported. Use exactly these keys: date_time_of_loss, description_of_loss, parties_involved, immediate_actions, unsupported_details, review_required. unsupported_details must be an array of strings and review_required must be true."},{role:"user",content:parsed.data.raw_client_statement}]});
       const content=completion.choices[0]?.message?.content;
       if(content){const candidate=draftSchema.safeParse(JSON.parse(content));if(candidate.success){draft=candidate.data;engine="groq-grounded"}else engine="deterministic-invalid-ai-fallback"}
     }catch{engine="deterministic-fallback"}
