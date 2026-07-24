@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 const liveReceipt = process.env.VOWRAIL_E2E_RECEIPT;
 
-for (const route of ['/', '/app', '/studio', '/lab', '/receipts']) {
+for (const route of ['/', '/app', '/studio', '/lab', '/receipts', '/verify']) {
   test(`${route} renders without page errors`, async ({ page }) => { const errors: string[] = []; page.on('pageerror', (error) => errors.push(error.message)); await page.goto(route); await expect(page.locator('body')).toBeVisible(); expect(errors).toEqual([]); });
 }
 
@@ -30,6 +30,14 @@ test('checkout lab verifies a live receipt', async ({ page }) => {
   await expect(page.getByText('Receipt accepted. Resource released.')).toBeVisible({ timeout: 60_000 });
 });
 
+test('public verifier decodes a live V2 receipt', async ({ page }) => {
+  test.skip(!liveReceipt, 'VOWRAIL_E2E_RECEIPT is not configured');
+  await page.goto(`/verify?receipt=${liveReceipt}`);
+  await page.getByRole('button', { name: /Verify receipt/ }).click();
+  await expect(page.getByText('Proof verified on-chain')).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText('7Pn6g5g88YzD5aJyCzrftCwQqCWm8bxYxPpUC2xURG2V')).toBeVisible();
+});
+
 test('policy studio blocks and approves deterministic intents', async ({ page }) => {
   await page.goto('/studio');
   const amount = page.getByLabel('Requested amount in SOL');
@@ -48,6 +56,6 @@ test('wallet connection reports a provider-backed state', async ({ page }) => {
   await expect(page.locator('[data-wallet-state=connected]')).toContainText('8oVo...1111');
 });
 
-for (const route of ['/', '/app', '/studio', '/lab', '/receipts']) {
+for (const route of ['/', '/app', '/studio', '/lab', '/receipts', '/verify']) {
   test(`${route} has no mobile horizontal overflow`, async ({ page }) => { await page.setViewportSize({ width: 375, height: 812 }); await page.goto(route); await expect(page.locator('body')).toBeVisible(); const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth); expect(overflow).toBeLessThanOrEqual(1); });
 }
