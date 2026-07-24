@@ -1,21 +1,15 @@
 import type { Metadata } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
+
 export const metadata: Metadata = {
-  title: "Vowrail | Transaction firewall for autonomous agents",
-  description: "Deterministic payment mandates, policy enforcement, simulation, and Solana settlement evidence for autonomous software.",
-  metadataBase: new URL("https://vowrail.vercel.app"),
-  openGraph: {
-    title: "Vowrail",
-    description: "Every paid agent action passes a mandate before settlement.",
-    type: "website",
-  },
+  title: "Vowrail - Guarded money movement for families",
+  description: "A Solana devnet remittance agent with recipient verification, policy limits, quote locks, and duplicate-send protection.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
+  return <html lang="en"><body className={inter.variable + " " + mono.variable}>{children}</body></html>;
 }

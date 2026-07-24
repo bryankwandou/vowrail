@@ -1,9 +1,2 @@
-import Link from "next/link";
-import { LayoutDashboard, ReceiptText, ShieldCheck, SlidersHorizontal } from "lucide-react";
-import { Logo } from "./logo";
-
-const links = [["/app","Overview",LayoutDashboard],["/studio","Policy studio",SlidersHorizontal],["/receipts","Receipts",ReceiptText],["/","Product site",ShieldCheck]] as const;
-
-export function AppShell({children,active}:{children:React.ReactNode;active:string}) {
-  return <div className="app-shell"><aside className="sidebar"><Link href="/" className="brand"><Logo light/>Vowrail</Link><div className="side-links">{links.map(([href,label,Icon])=><Link className={active===href?"active":""} href={href} key={href}><Icon size={16}/>{label}</Link>)}</div><div className="side-foot"><b>Devnet workspace</b><br/>Policies stay local until you anchor a receipt with your wallet.</div></aside><main className="main">{children}</main></div>;
-}
+import Link from"next/link";import{Bell,FileCheck2,LayoutDashboard,RefreshCw,Search,ShieldCheck,Users}from"lucide-react";import{BrandMark}from"./brand-mark";
+export function AppShell({children,active}:{children:React.ReactNode;active:string}){const items=[["Dashboard","/dashboard",LayoutDashboard],["Bind control","/bind-request/POL-1048",ShieldCheck],["Claims","/claims/CLM-209",FileCheck2],["Renewals","/renewals",RefreshCw],["Clients","/clients/CL-104",Users]]as const;return <div className="app-frame"><aside className="sidebar"><BrandMark/><div className="agency-switch"><small>Agency workspace</small><strong>Harbor & Pine</strong></div><nav>{items.map(([label,href,Icon])=><Link className={active===label?"active":""} href={href} key={label}><Icon size={18}/>{label}</Link>)}</nav><div className="sidebar-foot"><div className="avatar">AK</div><div><strong>Amelia Kane</strong><small>Agency Principal</small></div></div></aside><div className="app-main"><header className="topbar"><div className="search"><Search size={17}/><span>Search clients, policies, claims</span></div><button className="icon-button" aria-label="Notifications"><Bell size={18}/><i/></button></header>{children}</div></div>}

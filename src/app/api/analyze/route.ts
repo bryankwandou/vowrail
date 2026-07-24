@@ -1,6 +1,0 @@
-import Groq from "groq-sdk";
-import { NextResponse } from "next/server";
-import { z } from "zod";
-
-const input=z.object({policy:z.object({name:z.string().max(120),maxSol:z.number().nonnegative(),maxSlippageBps:z.number().nonnegative(),dailyLimitSol:z.number().nonnegative(),allowedPrograms:z.array(z.string()).max(20),blockedDestinations:z.array(z.string()).max(50)}),intent:z.object({amountSol:z.number().nonnegative(),slippageBps:z.number().nonnegative(),program:z.string().max(100)})});
-export async function POST(request:Request){const parsed=input.safeParse(await request.json());if(!parsed.success)return NextResponse.json({error:"Invalid policy input"},{status:400});if(!process.env.GROQ_API_KEY)return NextResponse.json({analysis:"The deterministic engine completed the decision. Add GROQ_API_KEY to enable an operator explanation."});const groq=new Groq({apiKey:process.env.GROQ_API_KEY});const completion=await groq.chat.completions.create({model:process.env.GROQ_MODEL||"llama-3.3-70b-versatile",temperature:.1,max_tokens:140,messages:[{role:"system",content:"Explain transaction risk to a treasury operator. Never override deterministic policy. Plain English, no hype, maximum 75 words."},{role:"user",content:JSON.stringify(parsed.data)}]});return NextResponse.json({analysis:completion.choices[0]?.message?.content||"No explanation returned."})}

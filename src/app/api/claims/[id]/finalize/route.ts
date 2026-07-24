@@ -1,0 +1,1 @@
+import{NextResponse}from"next/server";import{finalizeClaim}from"@/lib/mvp-store";export async function POST(_:Request,{params}:{params:Promise<{id:string}>}){const{id}=await params;try{return NextResponse.json(finalizeClaim(id))}catch(error){return NextResponse.json({error:error instanceof Error?error.message:"Unable to finalize claim."},{status:404})}}

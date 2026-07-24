@@ -1,0 +1,2 @@
+import Link from "next/link";
+export function BrandMark({compact=false}:{compact?:boolean}){return <Link className="brand" href="/" aria-label="Vowrail home"><svg viewBox="0 0 40 40" role="img" aria-hidden="true"><path d="M20 3.5 34 9v10.2c0 8.4-5.3 14.3-14 17.3C11.3 33.5 6 27.6 6 19.2V9l14-5.5Z"/><path className="brand-nib" d="m20 10 5.2 9.2L20 29.5l-5.2-10.3L20 10Zm0 0v12.4"/></svg>{!compact&&<span>Vowrail</span>}</Link>}

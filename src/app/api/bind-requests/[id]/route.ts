@@ -1,0 +1,1 @@
+import{NextResponse}from"next/server";import{policySnapshot}from"@/lib/mvp-store";export async function GET(_:Request,{params}:{params:Promise<{id:string}>}){const{id}=await params;const policy=policySnapshot(id);return policy?NextResponse.json(policy):NextResponse.json({error:"Policy not found."},{status:404})}
