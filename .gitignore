@@ -17,6 +17,11 @@ tollary-chain/
 src/test4.txt
 
 smoke.pid
+workflow.pid
 
 *.tsbuildinfo
 .vercel
+
+test-results/
+playwright-report/
+blob-report/

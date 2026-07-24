@@ -15,7 +15,7 @@ export async function POST(request: Request) {
   if (!parsed.success) return NextResponse.json({ error: "Invalid quote request", issues: parsed.error.flatten() }, { status: 400 });
   const issuedAt = new Date();
   const mandate = {
-    id: `tly_${randomUUID()}`,
+    id: `vwr_${randomUUID()}`,
     ...parsed.data,
     network: "solana-devnet",
     nonce: randomUUID(),

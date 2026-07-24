@@ -1,27 +1,45 @@
-# Idea Audit: YieldAgent to Vowrail
+﻿# Idea Audit: Vowrail V2
+
+## Date
+
+July 24, 2026.
 
 ## Brutal verdict
 
-The original YieldAgent direction is crowded, easy to copy, hard to trust, and commercially weak before audited custody exists. Devnet yield is not economically meaningful, so the demo risks becoming a dashboard around invented numbers. Groq latency is not a moat. Pool allowlists and caps are useful, but tying them only to liquidity positions traps the product in one workflow.
+A generic “control layer before capital moves” is no longer unique. Vishwa publicly occupies that framing, while wallet and smart-account vendors can add basic spend limits. If Vowrail stops at allowlists and caps, it becomes a feature with no distribution advantage.
 
-## Revised company
+The defendable direction is narrower: **proof-carrying mandates**. A decision must produce an evidence object that travels beyond the wallet and can be verified by the paid provider before it releases work. This creates a two-sided integration surface instead of another operator dashboard.
 
-Vowrail generalizes the valuable part: enforceable boundaries between agent reasoning and transaction authority. Yield rebalancing becomes one integration, not the company. The wedge is a visual policy studio and proof-carrying receipt flow for Solana agent teams.
+## Locked product loop
+
+1. Provider returns a typed 402 mandate.
+2. Agent submits the mandate to deterministic policy.
+3. Wallet creates an approved receipt PDA.
+4. Provider verifies provider, amount, policy, mandate hash, expiry, and timestamp.
+5. Protected resource is released only after verification.
+
+## Why crypto is required
+
+The provider and operator may not trust the same database. Solana supplies a shared, low-cost evidence layer where both parties can inspect the same policy and receipt state without giving Vowrail custody.
 
 ## Business model
 
-- Customer: Solana agent startups, treasury teams, protocol automation operators.
-- Pain: wallet access is broad; prompts are not enforceable controls.
-- Value: deterministic mandate checks and evidence before signature.
-- Channel: open-source SDK, hackathons, wallet and framework integrations.
-- Revenue: hosted policy control plane, usage simulation, team governance.
-- Moat target: portable policy schema, decoder coverage, receipt graph, integrations.
+- Initial customer: teams running agents with real treasury authority and paid data/API dependencies.
+- Wedge: receipt-gated x402 checkout adapter and policy studio.
+- Revenue: hosted verification, policy templates, evidence retention, provider risk data, and team governance.
+- Distribution: open provider middleware, agent SDK, wallet integrations, and public receipt explorer.
+- Moat target: mandate schema adoption, provider verification integrations, and cross-provider receipt graph.
 
-## SWOT
+## Revised score
 
-- Strength: clear security boundary, visible demo, non-custodial MVP.
-- Weakness: Memo is evidence rather than full on-chain enforcement.
-- Opportunity: agent wallets, treasury automation, compliance evidence.
-- Threat: wallets and simulation vendors can copy policy controls.
+| Dimension | Score |
+|---|---:|
+| Pain severity | 93 |
+| Crypto necessity | 94 |
+| Differentiation | 89 |
+| MVP proof | 92 |
+| Distribution | 77 |
+| Defensibility | 84 |
+| Overall | 88 |
 
-The revised opportunity scores 84/100, not a fabricated 99.5. It can reach the 90s only after audited enforcement, design partners, measured false-positive rates, and integrations with switching cost.
+A score above 95 remains unjustified until independent security review, design partners, repeated paid volume, and evidence that providers will integrate receipt verification.

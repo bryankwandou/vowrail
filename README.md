@@ -50,3 +50,12 @@ Groq is restricted to operator-facing explanation. It cannot change a policy res
 ## License
 
 MIT
+
+## V2 Iteration Proof - July 24, 2026
+
+- Program upgrade transaction: `3vDk8vhsaYMaAJtQRgT9QPbtkK773mboay76FKC6be6pQSBpaLBHaFscEaxCe69gdjyM2MQoqBF4ZzXax8zQ8T9h`
+- V2 policy PDA: `4dnDNabjFFKfKgpSypne7guRvFQEosvfd49ASUyvLYz5`
+- V2 receipt PDA: `nbiU3KWMD3qQrTFBHZSSGW4GbjMiWgqwvyKjB2zuVF3`
+- V2 workflow transaction: `Fpf1DHzQ9ACET75j2k8KaBiPRZTQqbp48bkc7apmDgQNp8FwdvfT6oJYwyo8kDhn2wWf6CuKCFseQ6gmdETc2fN`
+
+V2 enforces provider allowlists, policy expiry, slippage ceilings, per-call limits, and daily limits on-chain. The Checkout Lab verifies the receipt account before releasing its protected resource.
